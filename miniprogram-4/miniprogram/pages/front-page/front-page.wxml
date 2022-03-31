@@ -1,12 +1,12 @@
 <!--pages/front-page/front-page.wxml-->
-<view class="top1">
+<view class="top1" bindtap="onLinkIndex">
   <view class="title-text1" bindtap="toD1">办公室查询</view>
 </view>
-<view class="top2">
+<view class="top2" bindtap="onLinkVr">
   <view class="top2-item">
-    <view class="title-text2">VR实景</view>
+    <view class="title-text2" >VR实景</view>
   </view>
-  <view class="top3-item">
+  <view class="top3-item" bindtap="onLinkThreeD">
     <view class="title-text2">3D实景</view>
   </view>
 </view>

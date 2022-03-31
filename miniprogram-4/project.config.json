@@ -39,7 +39,6 @@
         "useCompilerPlugins": false,
         "ignoreUploadUnusedFiles": true
     },
-    
     "appid": "wx20e888809c409e38",
     "projectname": "miniprogram-4",
     "libVersion": "2.14.1",

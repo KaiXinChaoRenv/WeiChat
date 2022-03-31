@@ -27,15 +27,30 @@ Page({
             message1:true,
             message2:false
         })
-        
+
     },
     Read:function(){
         this.setData({
             message1:false,
             message2:true
         })
-        
+
     },
+  onLinkIndex:function (){
+    wx.navigateTo({
+      url: "../../packageA/pages/index/index"
+    })
+  },
+  onLinkVr:function (){
+    wx.navigateTo({
+      url: "../../packageA/pages/vrPage/index"
+    })
+  },
+  onLinkThreeD:function (){
+    wx.navigateTo({
+      url: "../../packageA/pages/threeMap/index"
+    })
+  },
     /**
      * 生命周期函数--监听页面加载
      */
