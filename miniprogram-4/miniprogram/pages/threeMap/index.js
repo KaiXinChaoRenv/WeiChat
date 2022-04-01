@@ -1,15 +1,17 @@
 // pages/threeMap/index.js
 // import { createScopedThreejs } from 'threejs-miniprogram'
-import * as THREE from "../../../libs/three.weapp"
-import { OrbitControls } from '../../../jsm/controls/OrbitControls'
+import * as THREE from "../../libs/three.weapp"
+import { OrbitControls } from '../../jsm/controls/OrbitControls'
 // const imgLou = require()
 Page({
 
     /**
      * 页面的初始数据
      */
-    data: {
-
+    data(){
+      return {
+        canvasId: ''
+      }
     },
 
     /**
@@ -24,14 +26,15 @@ Page({
      */
     onReady() {
       wx.createSelectorQuery()
-        .select('#webgl')
+        .select('#can3D')
         .node()
         .exec((res) => {
           // const canvas = res[0].node
           // 创建一个与 canvas 绑定的 three.js
           // const THREE = createScopedThreejs(canvas)
-          const canvas = THREE.global.registerCanvas('id_123', res[0].node)
-          console.log(THREE)
+          console.log(res,1213)
+          const canvas = THREE.global.registerCanvas(res[0].node)
+          this.setData({ canvasId: canvas._canvasId })
           // 创建场景
           var scene = new THREE.Scene();
           // 创建相机   远景相机  和 正交相机
@@ -55,7 +58,7 @@ Page({
           const group = new THREE.Group();
 
           // 创建函数
-          var texture = new THREE.TextureLoader().load('../assets/楼梯.png', function (res) {
+          var texture = new THREE.TextureLoader().load('../image/楼梯.png', function (res) {
             renderer.render(scene, camera);
             console.log('success', res);
           }, undefined, function (err) {
@@ -215,13 +218,13 @@ Page({
      * 生命周期函数--监听页面显示
      */
     touchStart(e) {
-      THREE.global.touchEventHandlerFactory('canvas', 'touchstart')(e)
+      THREE.global.touchEventHandlerFactory('canvas', 'touchstart1')(e)
     },
     touchMove(e) {
-      THREE.global.touchEventHandlerFactory('canvas', 'touchmove')(e)
+      THREE.global.touchEventHandlerFactory('canvas', 'touchmove1')(e)
     },
     touchEnd(e) {
-      THREE.global.touchEventHandlerFactory('canvas', 'touchend')(e)
+      THREE.global.touchEventHandlerFactory('canvas', 'touchend1')(e)
     },
     onShow: function () {
 
@@ -237,10 +240,11 @@ Page({
     /**
      * 生命周期函数--监听页面卸载
      */
-    onUnload: function () {
 
-    },
-
+  onUnload: function () {
+    //  释放canvas
+    THREE.global.unregisterCanvas(this.data.canvasId)
+  },
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */

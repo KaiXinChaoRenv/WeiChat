@@ -1,1 +1,5 @@
-/* packageA/pages/detail/index.wxss */
+/* pages/detail/index.wxss */
+.a{
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,13 +1,24 @@
 Page({
     data: {
+      longitude: 114.307885,
+      latitude: 30.486634,
       Height: 0,
-      scale: 13,
-      latitude: "",
-      longitude: "",
-      markers: [],
+      scale: 18,
+      markers: [
+        {
+            id: "1",
+            latitude:  30.486634,
+            longitude:114.307885,
+            width: 30,
+            height: 30,
+            iconPath: "../image/定位.png",
+            title: "信科院"
+
+          }
+      ],
       controls: [{
         id: 1,
-        iconPath: '/assets/加.png',
+        iconPath: 'http://www.chenxv.link/imgTemp/%E5%8A%A0.png',
         position: {
           left: 320,
           top: 100 - 50,
@@ -18,7 +29,7 @@ Page({
       },
       {
         id: 2,
-        iconPath: '/assets/减.png',
+        iconPath: 'http://www.chenxv.link/imgTemp/%E5%87%8F.png',
         position: {
           left: 340,
           top: 100 - 50,
@@ -28,8 +39,14 @@ Page({
         clickable: true
       }
       ],
-      circles: []
-
+      circles: [{
+        latitude: 30.486634,
+        longitude: 114.307885,
+        color: '#FF0000DD',
+        fillColor: '#7cb5ec88',
+        radius: 25,
+        strokeWidth: 1
+      }]
     },
 
     onLoad: function () {
@@ -48,36 +65,30 @@ Page({
         }
       })
 
-      wx.getLocation({
-        type: 'wgs84', // 默认为 wgs84 返回 gps 坐标，gcj02 返回可用于 wx.openLocation 的坐标
-        success: function (res) {
+      // wx.getLocation({
+      //   type: 'wgs84', // 默认为 wgs84 返回 gps 坐标，gcj02 返回可用于 wx.openLocation 的坐标
+      //   success: function (res) {
 
-          _this.setData({
-            latitude: res.latitude,
-            longitude: res.longitude,
-            markers: [{
-              id: "1",
-              latitude: res.latitude,
-              longitude: res.longitude,
-              width: 50,
-              height: 50,
-              iconPath: "../asssets/定位.png",
-              title: "哪里"
+      //     _this.setData({
+      //       latitude: 114.307778,
+      //       longitude: 30.486874,
+            
+      //       // markers: [{
+      //       //   id: "1",
+      //       //   latitude: res.latitude,
+      //       //   longitude: res.longitude,
+      //       //   width: 50,
+      //       //   height: 50,
+      //       //   iconPath: "../image/定位.png",
+      //       //   title: "哪里"
 
-            }],
-            circles: [{
-              latitude: res.latitude,
-              longitude: res.longitude,
-              color: '#FF0000DD',
-              fillColor: '#7cb5ec88',
-              radius: 3000,
-              strokeWidth: 1
-            }]
+      //       // }],
 
-          })
-        }
 
-      })
+      //     })
+      //   }
+
+      // })
 
     },
 
@@ -90,7 +101,7 @@ Page({
       console.log(e.markerId)
 
       wx.showActionSheet({
-        itemList: ["A"],
+        itemList: ["信息科学与工程学院"],
         success: function (res) {
           console.log(res.tapIndex)
         },

@@ -1,6 +1,10 @@
 <!--pages/front-page/front-page.wxml-->
+<view class="top-wrapper">
+  <view class="top-title">Hey,{{timer}}</view>
+  <view class="top-text">{{timerMessage}}</view>
+</view>
 <view class="top1" bindtap="onLinkIndex">
-  <view class="title-text1" bindtap="toD1">办公室查询</view>
+  <view class="title-text1" >办公室查询</view>
 </view>
 <view class="top2" bindtap="onLinkVr">
   <view class="top2-item">
@@ -13,8 +17,8 @@
 <hr/>
 <view>
 <view class="cent1-item">
-<view class="message-board" bindtap="Liu1" >精选问答</view>
-<view class="message-board" bindtap="Read">留言板</view>
+  <view class="message-board {{!message1?'second':''}}" bindtap="Liu1">精选问答</view>
+  <view class="message-board {{message1?'second':''}}" bindtap="Read" style="padding-left: 25rpx">留言板</view>
 </view>
 <view wx:if="{{message1}}" class="item01-answer" wx:for="{{array}}" wx:key="{{item}}">
 <view class="item02-answer">

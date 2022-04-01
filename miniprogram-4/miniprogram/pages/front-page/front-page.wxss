@@ -1,14 +1,28 @@
 /* pages/front-page/front-page.wxss */
 /* pages/index.wxss */
+.top-wrapper{
+    width: 700rpx;
+    margin: 0 auto;
+}
+.top-wrapper view{
+    padding-bottom: 15px;
+}
+.top-title{
+    font-size: 2rem;
+    font-weight: 600;
+}
+.top-text{
+    color: #919191;
+}
 .top1 {
-    background-color: rgb(255, 194, 194);
-    margin: 0 auto; 
+    background-color: #FFD4C1;
+    margin: 0 auto;
     width: 700rpx;
     height: 300rpx;
     border-radius: 48rpx;
     margin-bottom: 20rpx;
   }
-  
+
   .top2 {
     width: 700rpx;
     height: 240rpx;
@@ -16,15 +30,15 @@
     display: flex;
     justify-content: space-between;
   }
-  
+
   .top2-item {
     width: 340rpx;
-    background-color: rgb(30, 192, 241);
+    background-color: #A3E3FC;
     border-radius: 48rpx;
   }
   .top3-item{
     width: 340rpx;
-    background-color: rgb(30, 241, 135);
+    background-color: #A0F7CD;
     border-radius: 48rpx;
   }
   .title-text1 {
@@ -32,16 +46,16 @@
     font-size: normal;
     font-size: 40rpx;
     font-weight: 900;
-   
+
   }
   .title-text2{
     padding: 60rpx;
     font-size: normal;
     font-size: 30rpx;
     font-weight: 900;
-    
+
   }
-  
+
 .cent1-item{
     width: 500rpx;
     border-radius: 48rpx;
@@ -49,6 +63,7 @@
 }
 
   .message-board{
+      color: #353535;
     font-style: normal;
      font-size: 38rpx;
      font-weight: 900;
@@ -56,9 +71,14 @@
       border-left: 500rpx;
       text-align: center;
   }
+  .second{
+      color: #767676;
+      font-size: 32rpx;
+      margin-top: 7rpx;
+  }
 .item01-answer{
   background-color: rgb(255, 255, 255);
-    margin: 0 auto; 
+    margin: 0 auto;
     width: 700rpx;
     height: 200rpx;
     border-radius: 40rpx;
@@ -81,7 +101,7 @@
   font-weight: 600;
 }
 .item02-text{
-  
+
   padding: 40rpx;
   font-size: 30rpx;
   font-weight: 400;

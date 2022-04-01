@@ -2,13 +2,10 @@
   "pages": [
     "pages/front-page/front-page",
     "pages/my/my",
-    "pages/map/map"
+    "pages/map/map",
+    "pages/threeMap/index",
+    "pages/vrPage/index"
   ],
-  "permission": {
-    "scope.userLocation": {
-      "desc": "你的位置信息将用于小程序位置接口的效果展示"
-    }
-  },
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
@@ -55,8 +52,6 @@
       "root": "packageA",
       "pages": [
         "pages/index/index",
-        "pages/vrPage/index",
-        "pages/threeMap/index",
         "pages/detail/index"
       ]
     }

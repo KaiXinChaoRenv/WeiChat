@@ -7,6 +7,8 @@ Page({
     data: {
         message1:true,
         message2:false,
+        timer: '',
+        timerMessage: '',
         array:[
             {
                 question:'亲们质量怎么样 是棉的吗?',
@@ -43,12 +45,12 @@ Page({
   },
   onLinkVr:function (){
     wx.navigateTo({
-      url: "../../packageA/pages/vrPage/index"
+      url: "/pages/vrPage/index"
     })
   },
   onLinkThreeD:function (){
     wx.navigateTo({
-      url: "../../packageA/pages/threeMap/index"
+      url: "/pages/threeMap/index"
     })
   },
     /**
@@ -62,6 +64,31 @@ Page({
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
+      const now = Date.now()
+      const Hours = new Date().getHours(now)
+      console.log(typeof Hours,Hours)
+      if( Hours >=18 ||( 4 > Hours && Hours>=0)){
+        this.setData({
+          timer: '晚上好',
+          timerMessage: '今天学习任务完成的怎么样了？'
+        })
+      }else if(11>Hours && Hours>=4){
+        this.setData({
+          timer: '早上好',
+          timerMessage: '一日之计在于晨，让我们一起学习吧。'
+        })
+      }else if(2>Hours && Hours>=11){
+        this.setData({
+          timer: '中午好',
+          timerMessage: '午后时光，需要脑休，看看视频，洗洗眼睛，来点放松。'
+        })
+      }else {
+        this.setData({
+          timer: '下午好',
+          timerMessage: '下午好下午好下午好'
+        })
+      }
+
 
     },
 

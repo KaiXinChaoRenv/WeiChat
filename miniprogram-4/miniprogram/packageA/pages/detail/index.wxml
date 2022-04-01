@@ -1,2 +1,10 @@
-<!--packageA/pages/detail/index.wxml-->
-<text>packageA/pages/detail/index.wxml</text>
+<!--pages/detail/index.wxml-->
+<van-collapse value="{{ activeNames }}" bind:change="onChange" >
+  <van-collapse-item wx:for="{{ array }}" wx:key="index" name="{{index}}" title="{{i['姓名']}}" wx:for-item="i">
+    <view >{{i['职务']}}</view>
+    <view>{{i['备注']}}</view>
+  </van-collapse-item>
+</van-collapse>
+
+
+
