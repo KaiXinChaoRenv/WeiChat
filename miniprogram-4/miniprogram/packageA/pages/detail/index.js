@@ -23,7 +23,7 @@ Page({
       title: roomId  //修改title
     })
     wx.request({
-      url: `https://wx.request.chenxv.link:8002/学院信息查询/办公室查询/${roomId}`, //仅为示例，并非真实的接口地址
+      url: `https://wx.request.huangjinyu.xyz:8100/学院信息查询/办公室查询/${roomId}`, //仅为示例，并非真实的接口地址
 
       header: {
         'content-type': 'application/json' // 默认值

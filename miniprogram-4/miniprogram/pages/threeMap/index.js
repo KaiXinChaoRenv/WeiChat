@@ -25,14 +25,13 @@ Page({
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady() {
-      wx.createSelectorQuery()
+        wx.createSelectorQuery()
         .select('#can3D')
         .node()
         .exec((res) => {
           // const canvas = res[0].node
           // 创建一个与 canvas 绑定的 three.js
           // const THREE = createScopedThreejs(canvas)
-          console.log(res,1213)
           const canvas = THREE.global.registerCanvas(res[0].node)
           this.setData({ canvasId: canvas._canvasId })
           // 创建场景
@@ -212,19 +211,22 @@ Page({
           }
 
           render()
-    })},
+    })
+
+
+  },
 
     /**
      * 生命周期函数--监听页面显示
      */
     touchStart(e) {
-      THREE.global.touchEventHandlerFactory('canvas', 'touchstart1')(e)
+      THREE.global.touchEventHandlerFactory('canvas', 'touchstart')(e)
     },
     touchMove(e) {
-      THREE.global.touchEventHandlerFactory('canvas', 'touchmove1')(e)
+      THREE.global.touchEventHandlerFactory('canvas', 'touchmove')(e)
     },
     touchEnd(e) {
-      THREE.global.touchEventHandlerFactory('canvas', 'touchend1')(e)
+      THREE.global.touchEventHandlerFactory('canvas', 'touchend')(e)
     },
     onShow: function () {
 

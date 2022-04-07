@@ -8,28 +8,30 @@
 </view>
 <view class="top2" bindtap="onLinkVr">
   <view class="top2-item">
+    <view class="top2-item-inner"></view>
     <view class="title-text2" >VR实景</view>
   </view>
   <view class="top3-item" bindtap="onLinkThreeD">
-    <view class="title-text2">3D实景</view>
+    <view class="top3-item-inner"></view>
+    <view class="title-text2">3D视图</view>
   </view>
 </view>
 <hr/>
 <view>
 <view class="cent1-item">
-  <view class="message-board {{!message1?'second':''}}" bindtap="Liu1">精选问答</view>
+  <view class="message-board {{!message1?'second':''}}" bindtap="Liu1">常见问题</view>
   <view class="message-board {{message1?'second':''}}" bindtap="Read" style="padding-left: 25rpx">留言板</view>
 </view>
-<view wx:if="{{message1}}" class="item01-answer" wx:for="{{array}}" wx:key="{{item}}">
-<view class="item02-answer">
-<image src="../image/wen.png" class="item-photo"></image>
-<view class="item01-text">{{item.question}}</view>
-</view>
-<view class="item02-answer">
-<image src="../image/da.png" class="item-photo"></image>
-<view class="item02-text">{{item.answer}}</view>
-</view>
+<view wx:if="{{message1}}" class="item01-answer" wx:for="{{array}}" wx:key="{{item.question}}">
+  <view class="item02-answer">
+    <view class="item01-text">Q：{{item.question}}</view>
+  </view>
+  <view class="item02-answer">
+    <view class="item02-text">A：{{item.answer}}</view>
+  </view>
 </view>
 
-<view wx:if="{{message2}}">11111111</view>
+<view wx:if="{{message2}}">
+  <view style="margin-left: 25px; font-size: 23px">暂未上线</view>
+</view>
 </view>

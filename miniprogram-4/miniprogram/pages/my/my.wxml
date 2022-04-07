@@ -8,16 +8,16 @@
 <view class="item"></view>
 <van-icon name="arrow" size="25px"/>
 </view>
-<view wx:else="{{canToDeng}}">
-    <view class="Deng-top2-item">
-  <image class="top3-item" src="{{userInfo.avatarUrl}}"></image>
-  <view class="Deng-top4-item">{{userInfo.nickName}}</view>
-</view>
-</view>
+  <view wx:else="{{canToDeng}}">
+      <view class="Deng-top2-item">
+        <image class="top3-item" src="{{userInfo.avatarUrl}}"></image>
+        <view class="Deng-top4-item">{{userInfo.nickName}}</view>
+      </view>
+  </view>
 </view>
 <van-cell
   is-link
-  title="操作记录"
+  title="联系我们"
   link-type="navigateTo"
   url="/pages/dashboard/index"
 />
@@ -31,7 +31,7 @@
 <view class="item-kong"></view>
 <van-cell
   is-link
-  title="帮助"
+  title="投诉反馈"
   link-type="navigateTo"
   url="/pages/dashboard/index"
 />

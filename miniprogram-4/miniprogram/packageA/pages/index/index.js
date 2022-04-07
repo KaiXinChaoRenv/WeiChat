@@ -91,7 +91,6 @@ Page({
       .exec((res) => {
         const canvas = res[0].node
         this.canvas = canvas
-        console.log(res)
         const ctx = canvas.getContext('2d')
         this.ctx = ctx
         ctx.strokeRectPro = function(name,begX,begY,w,h,color){

@@ -5,16 +5,17 @@
     height: 200rpx;
     border-radius: 30rpx;
     margin-bottom: 20rpx;
-    
+
 }
 .top2-item{
     display: flex;
 }
 .top3-item{
-    padding: 10rpx;
+    margin: 10rpx;
     width: 150rpx;
     height: 150rpx;
-    border-radius: 10rpx;
+    border-radius: 50%;
+
 }
 .top4-item{
     padding: 30rpx;
@@ -46,5 +47,6 @@
 .top{
     height: 100%;
     background: -webkit-linear-gradient(left,rgb(234, 246, 255),rgb(210, 237, 247),rgb(153, 220, 247));
-    
+
 }
+

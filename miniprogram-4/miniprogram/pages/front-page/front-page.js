@@ -9,20 +9,7 @@ Page({
         message2:false,
         timer: '',
         timerMessage: '',
-        array:[
-            {
-                question:'亲们质量怎么样 是棉的吗?',
-                answer:'是的'
-            },
-            {
-                question:'会起球吗？',
-                answer:'不会'
-            },
-            {
-                question:'我想买厚一点的会不会薄',
-                answer:'不会呀'
-            },
-        ]
+        array:[]
     },
     Liu1:function(){
         this.setData({
@@ -77,19 +64,28 @@ Page({
           timer: '早上好',
           timerMessage: '一日之计在于晨，让我们一起学习吧。'
         })
-      }else if(2>Hours && Hours>=11){
+      }else if(14>Hours && Hours>=11){
         this.setData({
           timer: '中午好',
-          timerMessage: '午后时光，需要脑休，看看视频，洗洗眼睛，来点放松。'
+          timerMessage: '午后时光，需要脑休，洗洗眼睛，来点放松。'
         })
       }else {
         this.setData({
           timer: '下午好',
-          timerMessage: '下午好下午好下午好'
+          timerMessage: '下午了，每天都要进步哦'
         })
       }
-
-
+      const that = this
+      wx.request({url: 'https://wx.request.huangjinyu.xyz:8100/学院信息查询/问题查询' ,   header: {
+          'content-type': 'application/json' // 默认值
+        },
+        success (res) {
+          console.log(res.data)
+          const data  = res.data
+          that.setData({
+            array: data.问题列表
+          })
+        }})
     },
 
     /**
