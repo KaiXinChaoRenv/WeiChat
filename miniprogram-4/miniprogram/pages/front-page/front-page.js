@@ -37,7 +37,7 @@ Page({
   },
   onLinkThreeD:function (){
     wx.navigateTo({
-      url: "/pages/threeMap/index"
+      url: "../../packageA/pages/threeMap/index"
     })
   },
     /**

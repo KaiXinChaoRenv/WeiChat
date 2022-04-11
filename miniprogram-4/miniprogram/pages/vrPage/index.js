@@ -31,7 +31,7 @@ Page({
         camera.position.set(-0.1, 2, -5);
         controls.update();
 
-        var sides = ['http://www.chenxv.link/imgTemp/%E5%8F%B3.png', 'http://www.chenxv.link/imgTemp/%E5%B7%A6.png','http://www.chenxv.link/imgTemp/%E4%B8%8A.png', 'http://www.chenxv.link/imgTemp/%E4%B8%8B.png','http://www.chenxv.link/imgTemp/%E5%89%8D.png', 'http://www.chenxv.link/imgTemp/%E5%90%8E.png']
+        var sides = ['http://www.chenxv.link/imgTemp/%E5%8F%B3.jpg', 'http://www.chenxv.link/imgTemp/%E5%B7%A6.jpg','http://www.chenxv.link/imgTemp/%E4%B8%8A.jpg', 'http://www.chenxv.link/imgTemp/%E4%B8%8B.jpg','http://www.chenxv.link/imgTemp/%E5%89%8D.jpg', 'http://www.chenxv.link/imgTemp/%E5%90%8E.jpg']
         var materials = [];
         for (var i = 0; i < sides.length; i++) {
           var side = sides[i];

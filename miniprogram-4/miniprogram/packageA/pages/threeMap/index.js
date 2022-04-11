@@ -1,7 +1,7 @@
 // pages/threeMap/index.js
 // import { createScopedThreejs } from 'threejs-miniprogram'
-import * as THREE from "../../libs/three.weapp"
-import { OrbitControls } from '../../jsm/controls/OrbitControls'
+import * as THREE from "../../../libs/three.weapp"
+import { OrbitControls } from '../../../jsm/controls/OrbitControls'
 const hardwood2_bump = 'http://www.chenxv.link/imgTemp//hardwood2_bump.jpg'
 const hardwood2_diffuse = 'http://www.chenxv.link/imgTemp/hardwood2_diffuse.jpg'
 const brick_roughness = 'http://www.chenxv.link/imgTemp//brick_roughness.jpg'
@@ -15,8 +15,9 @@ const computerRight = 'http://www.chenxv.link/imgTemp/computer-2right.png'
 const plantUp = 'http://www.chenxv.link/imgTemp//plantUp.png'
 const plant = 'http://www.chenxv.link/imgTemp//plant.png'
 const plantDown = 'http://www.chenxv.link/imgTemp//plantDown.png'
+
+const ThreeBSP = require('../../../jsm/utils/index')(THREE)
 // const imgLou = require()
-const ThreeBSP = require('../../jsm/utils/index')(THREE)
 Page({
 
     /**
@@ -91,6 +92,8 @@ Page({
           const textureTvRight = createTexture(tvRight)
           const textureComputer = createTexture(computer)
           const textureComputerRight = createTexture(computerRight)
+          const texturePlantUp = createTexture(plantUp)
+          const texturePlantDown= createTexture(plantDown)
           const texturePlant= createTexture(plant)
 
 
@@ -105,7 +108,6 @@ Page({
               color: colors[colorIndex],
               // clipIntersection: true,
               map: texture,
-
               // transparent: true,
               // clippingPlanes : clip,
               side: THREE.DoubleSide
@@ -269,40 +271,11 @@ Page({
           // 电脑屏
           createCubeLevel1([1,0.1,1],[0.15,-2.7,4.1],textureComputer,8)
           createCubeLevel1([1,0.1,1],[1.15,-2.7,4.1],textureComputerRight,8)
-          // 电视屏
-          createCubeLevel1([1,0.1,1],[0.15,-5.3,4.1],textureTv,8)
-          createCubeLevel1([1,0.1,1],[1.15,-5.3,4.1],textureTvRight,8)
           // 花盆
-          function createCubeTransparent (size, position, texture, colorIndex){
-            const geometry = new THREE.BoxGeometry(...size);
-            const material = new THREE.MeshToonMaterial( {
-              color: colors[colorIndex],
-              map: texture,
-              transparent: true,
-              depthTest: false,
-              side: THREE.DoubleSide
-            }  );
-            const cube =  new THREE.Mesh( geometry, material );
-            const [x,y,z] = position
-            cube.position.set(x,y,z/2+0.01 )
-            group.add( cube );
-          }
-          function createPlant(position){
-            const geometry = new THREE.CylinderGeometry( 0.2, 0.15, 0.3, 32 );
-            const material = new THREE.MeshToonMaterial( {color: 0xAAAAAA} );
-            const cylinder = new THREE.Mesh( geometry, material );
-            const [x,y,z] = position
-            cylinder.position.set(x,y,1.5)
-            cylinder.rotation.x = Math.PI / 2
-            group.add( cylinder );
-            createCubeTransparent([0.5,0.05,0.8],position,texturePlant,8)
-            createCubeTransparent([0.05,0.5,0.8],position,texturePlant,8)
+          // createCubeLevel1([1.3,1.3,1.3],[1.15,-3.7,6.1],texturePlantUp,8)
+          // createCubeLevel1([1.3,1.3,1.3],[1.15,-3.7,3.8],texturePlantDown,8)
+          createCubeLevel1([1,0.1,2],[1.15,-3.7,3.8],texturePlant,8)
 
-          }
-          createPlant([1.55,-3.0,4.1])
-          createPlant([1.55,-5.8,4.1])
-          createPlant([-2.30,-3.0,4.1])
-          createPlant([-2.30,-6.5,4.1])
           createCubeOutLine([2.6, 2.6, height],[0.7, -6.45, height], null, 2)
           // 老师办公室 左
           createCubeOutLine([2.6, 1.8, height],[-3.0, -3.35, height], null, 3)
@@ -318,29 +291,27 @@ Page({
           // 椅子
 
           function createChart(position){
-            const geometry = new THREE.CylinderBufferGeometry( 0.1, 0.1, 0.6, 32 );
+            const geometry = new THREE.CylinderBufferGeometry( 1.3, 1.1, 0.6, 32 );
+            const geometry2 = new THREE.CylinderBufferGeometry( 1.2, 1.2, 1.6, 32 );
             const material = new THREE.MeshBasicMaterial( {color: 0x666666} );
             const cylinder = new THREE.Mesh( geometry, material );
-            cylinder.position.set(...position)
-            cylinder.rotation.x = Math.PI / 2
 
-            group.add( cylinder );
-          }
-          function useBSP(cylinder, cylinder2){
             const cylinderBSP = new ThreeBSP(cylinder)
 
-            const cubeBSP = new ThreeBSP(cylinder2)
-            const resultBSP = cylinderBSP.subtract(cubeBSP)
-            const result = resultBSP.toMesh()
-            result.geometry.computeFaceNormals()
-
-            result.geometry.computeVertexNormals()
+            const cubeBSP = new ThreeBSP(geometry2)
+            const resultBSP = cubeBSP.subtract(cylinderBSP)
+            resultBSP.position.set(...position)
+            resultBSP.rotation.x = Math.PI / 2
+            group.add( resultBSP );
           }
 
           createChart([-1.4, -4.25, height])
           createChart([-1.4, -4.55, height])
           createChart([-1.4, -5.95, height])
           createChart([-1.4, -6.25, height])
+
+          // const sphereGeometry = new THREE.SphereGeometry(50, 20, 20)
+
 
           // createCube([1.8, 1.6, height],[3.3, 3.45 , height], null, 1)
           // createCube(materialPink, [1, 1, 0.2],[0.2, 2, 0.2])
