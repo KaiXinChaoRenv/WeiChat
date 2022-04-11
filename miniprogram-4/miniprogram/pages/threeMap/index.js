@@ -12,9 +12,10 @@ const tv = 'http://www.chenxv.link/imgTemp//tv.png'
 const tvRight = 'http://www.chenxv.link/imgTemp//tv右.png'
 const computer = 'http://www.chenxv.link/imgTemp/computer-2.png'
 const computerRight = 'http://www.chenxv.link/imgTemp/computer-2right.png'
-const plantUp = 'http://www.chenxv.link/imgTemp//plantUp.png'
 const plant = 'http://www.chenxv.link/imgTemp//plant.png'
-const plantDown = 'http://www.chenxv.link/imgTemp//plantDown.png'
+const windowTransparent = 'http://www.chenxv.link/imgTemp//window.png'
+const doorTransparent = 'http://www.chenxv.link/imgTemp//doorTransparent.png'
+
 // const imgLou = require()
 const ThreeBSP = require('../../jsm/utils/index')(THREE)
 Page({
@@ -92,6 +93,8 @@ Page({
           const textureComputer = createTexture(computer)
           const textureComputerRight = createTexture(computerRight)
           const texturePlant= createTexture(plant)
+          const textureDoorTsp= createTexture(doorTransparent)
+          const textureWindowTsp= createTexture(windowTransparent)
 
 
           const planeMaterial = new THREE.MeshToonMaterial( {
@@ -115,6 +118,19 @@ Page({
             const [x,y,z] = position
             cube.position.set(x,y,z*1.5)
             group.add( cube );
+          }
+          function createCubeNotAdd (size, position, texture, colorIndex){
+            const geometry = new THREE.BoxGeometry(...size);
+            const material = new THREE.MeshToonMaterial( {
+              color: colors[colorIndex],
+              map: texture,
+              side: THREE.DoubleSide
+            }  );
+            // material.transparent = true
+            const cube =  new THREE.Mesh( geometry, material );
+            const [x,y,z] = position
+            cube.position.set(x,y,z*1.5)
+            return cube
           }
 
           function createCubeLevel1 (size, position, texture, colorIndex){
@@ -245,27 +261,46 @@ Page({
           createCubeOutLine([1.8, 0.8, height],[3.4, -7.35, height], null, 3)
           createCubeOutLine([1.8, 0.8, height],[3.4, -8.15, height], null, 0)
           createCubeOutLine([1.8, 0.8, height],[3.4, -8.95, height], null, 1)
-
-          function createCubeOutLine(size,position, texture,colorIndex){
+          function useBSP(bigGeometries, smallGeometries){
+            const bigGeometriesBSP = new ThreeBSP(bigGeometries)
+            const smallGeometriesBSP = new ThreeBSP(smallGeometries)
+            const resultBSP = bigGeometriesBSP.subtract(smallGeometriesBSP)
+            const result = resultBSP.toMesh()
+            result.geometry.computeFaceNormals()
+            result.geometry.computeVertexNormals()
+            return result
+          }
+          // 创建房间框的函数
+          function createCubeOutLine(size,position, texture,colorIndex, doorSide){
             const [w,h,o] = size
             const [x,y,z] = position
             const up = y + h/2 - 0.05
             const down = y - h/2 + 0.05
             const left = x - w/2 + 0.05
             const right =  x + w/2 - 0.05
-            // 上   y + h/2 + 0.05
-            // 下   y - h/2 - 0.05
-            // 左   x - x/2 + 0.05
-            // 下   x + x/2 - 0.05
-            createCube([w, 0.1, o],[x, up, z], texture, colorIndex)
-            createCube([w, 0.1, o],[x, down, z], texture, colorIndex)
-            createCube([0.1, h, o],[left, y, z], texture, colorIndex)
-            createCube([0.1, h, o],[right, y, z], texture, colorIndex)
-          //  地板
+
+            if(doorSide === 'left'){
+            // 左边开槽
+            // 建糟
+              //  左
+              const bigCube = createCubeNotAdd([0.1, h, o],[left, y, z], texture, colorIndex)
+              const smallCube =  createCubeNotAdd([0.1, h/3, o],[left, y, z], texture, colorIndex)
+              console.log(bigCube)
+              const res = useBSP(bigCube, smallCube)
+              // group.add(res)
+              // 上
+              createCube([w, 0.1, o],[x, up, z], texture, colorIndex)
+              // 下
+              createCube([w, 0.1, o],[x, down, z], texture, colorIndex)
+              // 右
+              createCube([0.1, h, o],[right, y, z], texture, colorIndex)
+            } else if (doorSide === 'right'){
+
+            }
+            //  地板
             createCube([w-0.2,h-0.2, 0.1],[x,y, 0.9], textureBg, 8)
           }
-          // 老师办公室 右
-          createCubeOutLine([2.6, 2.6, height],[0.7, -3.85, height], null, 0)
+          // 以下都是装饰
           // 电脑屏
           createCubeLevel1([1,0.1,1],[0.15,-2.7,4.1],textureComputer,8)
           createCubeLevel1([1,0.1,1],[1.15,-2.7,4.1],textureComputerRight,8)
@@ -296,18 +331,25 @@ Page({
             cylinder.rotation.x = Math.PI / 2
             group.add( cylinder );
             createCubeTransparent([0.5,0.05,0.8],position,texturePlant,8)
-            createCubeTransparent([0.05,0.5,0.8],position,texturePlant,8)
 
           }
           createPlant([1.55,-3.0,4.1])
           createPlant([1.55,-5.8,4.1])
           createPlant([-2.30,-3.0,4.1])
           createPlant([-2.30,-6.5,4.1])
-          createCubeOutLine([2.6, 2.6, height],[0.7, -6.45, height], null, 2)
+          //透明门的创建
+          createCubeTransparent([1,0.05,2],[0,0,0],textureDoorTsp,8)
+          //透明窗的创建
+          createCubeTransparent([2,0.05,1],[1,1,4], textureWindowTsp,8)
+
+          // 老师办公室 右
+          createCubeOutLine([2.6, 2.6, height],[0.7, -6.45, height], null, 2,'left')
+          createCubeOutLine([2.6, 2.6, height],[0.7, -3.85, height], null, 0,'left')
+
           // 老师办公室 左
-          createCubeOutLine([2.6, 1.8, height],[-3.0, -3.35, height], null, 3)
-          createCubeOutLine([2.6, 1.8, height],[-3.0, -5.15, height], null, 0)
-          createCubeOutLine([2.6, 1.8, height],[-3.0, -6.95, height], null, 1)
+          createCubeOutLine([2.6, 1.8, height],[-3.0, -3.35, height], null, 3,'right')
+          createCubeOutLine([2.6, 1.8, height],[-3.0, -5.15, height], null, 0,'right')
+          createCubeOutLine([2.6, 1.8, height],[-3.0, -6.95, height], null, 1,'right')
           //挡板
           createCube([0.6, 0.1, height],[-0.9, -3.35, height], null, 4)
           createCube([0.6, 0.1, height],[-0.9, -6.85, height], null, 4)
@@ -326,16 +368,7 @@ Page({
 
             group.add( cylinder );
           }
-          function useBSP(cylinder, cylinder2){
-            const cylinderBSP = new ThreeBSP(cylinder)
 
-            const cubeBSP = new ThreeBSP(cylinder2)
-            const resultBSP = cylinderBSP.subtract(cubeBSP)
-            const result = resultBSP.toMesh()
-            result.geometry.computeFaceNormals()
-
-            result.geometry.computeVertexNormals()
-          }
 
           createChart([-1.4, -4.25, height])
           createChart([-1.4, -4.55, height])
