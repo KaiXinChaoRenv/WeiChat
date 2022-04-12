@@ -2,7 +2,7 @@
 <view class="top">
 <view class="top1-item">
 <view class="top2-item" bindtap="ToDdeng" wx:if="{{!canToDeng}}">
-<image class="top3-item" src="../image/not Avatar.png"></image>
+<image class="top3-item" src="../image/notAvatar.png"></image>
 <view class="top4-item" >登录/注册<view class="top5-item">微信登录/QQ登录</view>
 </view>
 <view class="item"></view>
@@ -15,6 +15,20 @@
       </view>
   </view>
 </view>
+<view wx:if="{{DengLu}}">
+<van-cell
+  is-link
+  title="我的二维码"
+  link-type="navigateTo"
+  url="/pages/class/class"
+/>
+<van-cell
+  is-link
+  title="我的课程"
+  link-type="navigateTo"
+  url="/pages/QR_code/QR_code"
+/>
+</view>
 <van-cell
   is-link
   title="联系我们"
@@ -25,7 +39,7 @@
   is-link
   title="帮助中心"
   link-type="navigateTo"
-  url="/pages/dashboard/index"
+  url="/pages/help/help"
 />
 
 <view class="item-kong"></view>
@@ -33,6 +47,7 @@
   is-link
   title="投诉反馈"
   link-type="navigateTo"
-  url="/pages/dashboard/index"
+  url="/pages/complaint/complaint"
 />
 </view>
+

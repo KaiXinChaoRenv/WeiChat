@@ -1,0 +1,8 @@
+<view class="top-item01">
+    <van-cell title="教材答案怎么搜？" is-link value="" arrow-direction="down" />
+    <van-cell title="有没有收藏功能？" is-link value="" arrow-direction="down" />
+    <van-cell title="拍照搜索怎么更准确？" is-link value="" arrow-direction="down" />
+    <view class="top-item02"> 
+    <view class="bottom-item-03"><button class="button01">我要反馈</button></view>
+    </view>
+</view>

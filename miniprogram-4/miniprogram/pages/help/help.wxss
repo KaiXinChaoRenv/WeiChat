@@ -1,0 +1,19 @@
+/* pages/help/help.wxss */
+.top-item01{
+    height: 100vh;
+    background-color: white;
+    padding: 30rpx;
+    
+}
+.top-item02{
+  position: absolute;
+  display: block;
+  bottom: 35px;
+  /* margin-top: 800rpx;  */
+  width: 90%;
+}
+.button01{
+    border-radius: 25rpx;
+    border: 1px solid tomato;
+    color: tomato;
+}

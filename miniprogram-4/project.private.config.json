@@ -16,6 +16,27 @@
                     "name": "我的",
                     "pathName": "pages/my/my",
                     "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "help",
+                    "pathName": "pages/help/help",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "投诉",
+                    "pathName": "pages/complaint/complaint",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "课表",
+                    "pathName": "pages/QR_code/QR_code",
+                    "query": "",
                     "scene": null,
                     "launchMode": "default"
                 }

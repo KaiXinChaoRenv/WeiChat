@@ -5,15 +5,34 @@ Page({
      * 页面的初始数据
      */
     data: {
-        canToDeng:false
+        canToDeng:false,
+        DengLu:false
     },
     ToDdeng:function(){
+      wx.login({
+        success (res) {
+          if (res.code) {
+            //发起网络请求
+            // wx.request({
+              // url: 'https://example.com/onLogin',
+              // data: {
+              //   code: res.code
+              // }
+            // })
+            console.log(res.code)
+          } else {
+            console.log('登录失败！' + res.errMsg)
+          }
+        }
+      })
         wx.getUserProfile({
             desc: '用于完善会员资料',
             success:(res)=>{
+              console.log(res)
               this.setData({
                 userInfo:res.userInfo,
-                canToDeng:true
+                canToDeng:true,
+                DengLu:true
               })
             }
           })
@@ -25,6 +44,7 @@ Page({
         if(wx.getUserProfile){
             this.setData({
               canIUseGetUserProfile:false
+              
             })
           }
     },

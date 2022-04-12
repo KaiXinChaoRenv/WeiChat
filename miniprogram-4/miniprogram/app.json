@@ -1,9 +1,13 @@
 {
   "pages": [
-    "pages/threeMap/index",
     "pages/front-page/front-page",
     "pages/my/my",
     "pages/map/map",
+    "pages/help/help",
+    "pages/QR_code/QR_code",
+    "pages/class/class",
+    "pages/complaint/complaint",
+    "pages/threeMap/index",
     "pages/vrPage/index"
   ],
   "window": {
