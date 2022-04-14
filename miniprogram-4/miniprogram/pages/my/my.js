@@ -13,13 +13,17 @@ Page({
         success (res) {
           if (res.code) {
             //发起网络请求
-            // wx.request({
-              // url: 'https://example.com/onLogin',
-              // data: {
-              //   code: res.code
-              // }
-            // })
+            wx.request({
+              url: 'https://wx.request.huangjinyu.xyz:8100/wx_login/login',
+              success(res){
+                console.log(res.data.openid)
+              },
+              data: {
+                code: res.code
+              }
+            })
             console.log(res.code)
+            
           } else {
             console.log('登录失败！' + res.errMsg)
           }

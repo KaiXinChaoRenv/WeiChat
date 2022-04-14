@@ -20,13 +20,13 @@
   is-link
   title="我的二维码"
   link-type="navigateTo"
-  url="/pages/class/class"
+  url="/pages/QR_code/QR_code"
 />
 <van-cell
   is-link
   title="我的课程"
   link-type="navigateTo"
-  url="/pages/QR_code/QR_code"
+  url="/pages/curriculum/curriculum"
 />
 </view>
 <van-cell

@@ -4,7 +4,8 @@
   <view class="top-text">{{timerMessage}}</view>
 </view>
 <view class="top1" bindtap="onLinkIndex">
-  <view class="title-text1" >办公室查询</view>
+  <view class="title-text1" >办公室查询<view class="title-text3">精准定位</view></view>
+  
   <image src="../image/find.png" style="width: 40%; height: 100%;" ></image>
 </view>
 <view class="top2" bindtap="onLinkVr">
@@ -15,7 +16,7 @@
   </view>
   <view class="top3-item" bindtap="onLinkThreeD">
     <view class="top3-item-inner"></view>
-    <view class="title-text2">3D视图 <image src="../image/icon_3D.png" class="img-item02"></image></view>
+    <view class="title-text2">3D视图<image src="../image/icon_3D.png" class="img-item02"></image></view>
   </view>
 </view>
 <hr/>

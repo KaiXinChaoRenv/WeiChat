@@ -37,6 +37,13 @@
                     "name": "课表",
                     "pathName": "pages/QR_code/QR_code",
                     "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "二维码",
+                    "pathName": "pages/QR_code/QR_code",
+                    "query": "",
                     "scene": null,
                     "launchMode": "default"
                 }

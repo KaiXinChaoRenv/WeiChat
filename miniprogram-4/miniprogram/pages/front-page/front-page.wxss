@@ -42,9 +42,9 @@
       display: flex;
   }
 .img-item01{
-  width: 80%;
+  width: 75%;
   height: 110%;
-  margin-left: 90rpx;
+  margin-left: 100rpx;
   z-index:90;
 }
 .img-item02{
@@ -98,7 +98,15 @@
     font-weight: 900;
     position:relative;
   }
+.title-text3{
+  font-size: 40rpx;
+  font-weight: 400;
+}
+.title-text4{
 
+  font-weight: 200;
+  font-weight: 15rpx;
+}
 .cent1-item{
     width: 500rpx;
     border-radius: 48rpx;

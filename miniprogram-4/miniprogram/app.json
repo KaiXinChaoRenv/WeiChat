@@ -5,7 +5,7 @@
     "pages/map/map",
     "pages/help/help",
     "pages/QR_code/QR_code",
-    "pages/class/class",
+    "pages/curriculum/curriculum",
     "pages/complaint/complaint",
     "pages/threeMap/index",
     "pages/vrPage/index"
