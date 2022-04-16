@@ -2,13 +2,14 @@
 .top-item01{
     height: 100vh;
     background-color: white;
-    padding: 30rpx;
-    
+    width: 100%;
 }
 .top-item02{
   position: absolute;
   display: block;
   bottom: 35px;
+    left: 50%;
+    transform: translateX(-50%);
   /* margin-top: 800rpx;  */
   width: 90%;
 }
@@ -16,4 +17,7 @@
     border-radius: 25rpx;
     border: 1px solid tomato;
     color: tomato;
+}
+.scroll-wrapper{
+    height: calc(100vh - 83px);
 }

@@ -23,7 +23,7 @@ Page({
               }
             })
             console.log(res.code)
-            
+
           } else {
             console.log('登录失败！' + res.errMsg)
           }
@@ -48,11 +48,14 @@ Page({
         if(wx.getUserProfile){
             this.setData({
               canIUseGetUserProfile:false
-              
+
             })
           }
     },
-
+    handleContact (e) {
+      console.log(e.detail.path)
+      console.log(e.detail.query)
+    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */

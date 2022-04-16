@@ -49,4 +49,10 @@
     background: -webkit-linear-gradient(left,rgb(234, 246, 255),rgb(210, 237, 247),rgb(153, 220, 247));
 
 }
-
+.connect{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 24px;
+    text-indent: -9999px;
+}

@@ -32,9 +32,10 @@
 <van-cell
   is-link
   title="联系我们"
-  link-type="navigateTo"
-  url="/pages/dashboard/index"
-/>
+>
+  <button open-type="contact" bindcontact="handleContact" class="connect">1</button>
+</van-cell>
+<!--  <button open-type="contact" bindcontact="handleContact">联系我们</button>-->
 <van-cell
   is-link
   title="帮助中心"

@@ -95,11 +95,10 @@
     display: flex;
 }
 
-page{
-    background-image: url('https://fydn.imgix.net/m%2Fpod-artwork%2Fpool%2Fa7f72c2a57af48e4904f9b17b38bae54-modern-art-take-me-to-the-sea-art-print-P1.jpg?ar=1%3A1&auto=format%2Ccompress&crop=top&fit=crop&q=75&w=1280');
-    background-size: cover;
-    background-position: -160px 30px;
-}
+/*page{*/
+/*    background-size: cover;*/
+/*    background-position: -160px 30px;*/
+/*}*/
 /*.resetIcon{*/
 /*    position: absolute;*/
 /*    transform: translate(-50%, -50%);*/
@@ -123,4 +122,13 @@ page{
     top: 0;
     left: 0;
     background-color: #008c8c;
+}
+.bg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -10;
+    background-size: cover;
 }

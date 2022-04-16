@@ -9,7 +9,15 @@ Page({
         message2:false,
         timer: '',
         timerMessage: '',
-        array:[]
+        array:[],
+        currentPage: 1,
+        dataSum: 0,
+        limit: 10,
+        showEmpty: true,
+      scrollTop: 0,
+      offsetTop: 0,
+      searchResArr: []
+
     },
     Liu1:function(){
         this.setData({
@@ -51,13 +59,21 @@ Page({
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
+      this.setData({
+        container: () => wx.createSelectorQuery().select('#container'),
+      })
       const now = Date.now()
       const Hours = new Date().getHours(now)
       console.log(typeof Hours,Hours)
-      if( Hours >=18 ||( 4 > Hours && Hours>=0)){
+      if( Hours >=18){
         this.setData({
           timer: '晚上好',
           timerMessage: '今天学习任务完成的怎么样了？'
+        })
+      }else if(4 > Hours && Hours>=0){
+        this.setData({
+          timer: '夜深了',
+          timerMessage: '早点休息'
         })
       }else if(11>Hours && Hours>=4){
         this.setData({
@@ -76,14 +92,17 @@ Page({
         })
       }
       const that = this
-      wx.request({url: 'https://wx.request.huangjinyu.xyz:8100/学院信息查询/问题查询' ,   header: {
+      wx.request({url: `https://wx.request.huangjinyu.xyz:8100/学院信息查询/问题查询` ,   header: {
           'content-type': 'application/json' // 默认值
         },
         success (res) {
           console.log(res.data)
-          const data  = res.data
+          const total = res.question_sum
+          const data  = res.data.data
           that.setData({
-            array: data.问题列表
+            dataSum: total,
+            array: data.question_list,
+            currentPage: that.data.currentPage + 1
           })
         }})
     },
@@ -94,14 +113,67 @@ Page({
     onShow: function () {
 
     },
+  loadMore:function (){
+    console.log(this.data.currentPage)
+    if(this.data.currentPage * this.data.limit >= this.data.dataSum){
+      return
+    }
 
+    const that = this
+    wx.request({url: `https://wx.request.huangjinyu.xyz:8100/学院信息查询/问题查询?page=${that.data.currentPage}` ,   header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success (res) {
+        const data  = res.data.data
+        that.setData({
+          array: [...that.data.array, ...data.question_list],
+          currentPage: that.data.currentPage + 1
+        })
+      }})
+  },
+  onScroll(event) {
+    wx.createSelectorQuery()
+      .select('#scroller')
+      .boundingClientRect((res) => {
+        this.setData({
+          scrollTop: event.detail.scrollTop,
+          offsetTop: res.top,
+        });
+      })
+      .exec();
+  },
     /**
      * 生命周期函数--监听页面隐藏
      */
     onHide: function () {
 
     },
+  onSearch(e){
+    console.log(e.detail)
+    const that = this
+    if(e.detail.length > 0){
+      wx.request({url: `https://wx.request.huangjinyu.xyz:8100/学院信息查询/问题查询?question=${e.detail}`,
+        header: {
+          'content-type': 'application/json' // 默认值
+        },
+        success (res) {
+          const data  = res.data
+          console.log()
+          if(data.answer.length > 0 && Array.isArray(data.answer)){
+            that.setData({
+              showEmpty:  false,
+              searchResArr:  data.answer,
+            })
+          }else {
+            that.setData({
+              showEmpty:  true,
+              searchResArr:  [],
+            })
+          }
 
+        }})
+     }
+    },
     /**
      * 生命周期函数--监听页面卸载
      */

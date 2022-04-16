@@ -44,14 +44,6 @@ Page({
         var mesh = new THREE.Mesh( new THREE.BoxBufferGeometry( canvas.height, canvas.height, canvas.height ), materials );
         mesh.geometry.scale( -1, 1, 1 );
 
-        // var texture = new THREE.TextureLoader().load( 'http://www.yanhuangxueyuan.com/threejs/examples/textures/2294472375_24a3b8ef46_o.jpg',function (res){
-        //   renderer.render(scene, camera);
-        // } );
-        // texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-        // var texture = new THREE.TextureLoader().load( '../assets/楼梯.png',function (res){
-        //   renderer.render(scene, camera);
-        // } );
-        // canvas中文文档作者的图，侵删
         texture.minFilter = THREE.LinearFilter;
         texture.format = THREE.RGBFormat;
         // var material = new THREE.MeshBasicMaterial( { map: texture } );

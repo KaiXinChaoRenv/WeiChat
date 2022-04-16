@@ -44,6 +44,13 @@
                     "name": "二维码",
                     "pathName": "pages/QR_code/QR_code",
                     "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/map/map",
+                    "query": "",
                     "scene": null,
                     "launchMode": "default"
                 }

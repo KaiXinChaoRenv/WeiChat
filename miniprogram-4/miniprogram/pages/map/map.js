@@ -1,3 +1,11 @@
+let plugin = requirePlugin('routePlan');
+let key = 'YNOBZ-SK46G-IHOQ2-IOCOY-GQBLQ-4XBMX';  //使用在腾讯位置服务申请的key
+let referer = '首义Map';   //调用插件的app的名称
+let endPoint = JSON.stringify({  //终点
+  'name': '武昌首义学院信科院',
+  longitude: 114.307885,
+  latitude: 30.486634,
+});
 Page({
     data: {
       longitude: 114.307885,
@@ -65,30 +73,7 @@ Page({
         }
       })
 
-      // wx.getLocation({
-      //   type: 'wgs84', // 默认为 wgs84 返回 gps 坐标，gcj02 返回可用于 wx.openLocation 的坐标
-      //   success: function (res) {
 
-      //     _this.setData({
-      //       latitude: 114.307778,
-      //       longitude: 30.486874,
-            
-      //       // markers: [{
-      //       //   id: "1",
-      //       //   latitude: res.latitude,
-      //       //   longitude: res.longitude,
-      //       //   width: 50,
-      //       //   height: 50,
-      //       //   iconPath: "../image/定位.png",
-      //       //   title: "哪里"
-
-      //       // }],
-
-
-      //     })
-      //   }
-
-      // })
 
     },
 
@@ -110,7 +95,11 @@ Page({
         }
       })
     },
-
+    viewLine(){
+      wx.navigateTo({
+        url: 'plugin://routePlan/index?key=' + key + '&referer=' + referer + '&endPoint=' + endPoint
+      });
+    },
     //点击缩放按钮动态请求数据
     controltap(e) {
       var that = this;
