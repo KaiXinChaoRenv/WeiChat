@@ -1,9 +1,9 @@
 <view class="top-item01">
   <view class="top-item02">
-    <view class="middle-item01">金兰</view>
-    <view class="middle-item02" >辅导员</view>
-    <view wx:if="{{counselor}}" class=" middle-item02-a">计科2005-2010</view>
-    <view class="middle-item03">信息科学与工程学院</view>
+    <view class="middle-item01">{{name}}</view>
+    <view class="middle-item02" >{{job_title}}</view>
+    <view wx:if="{{counselor}}" class=" middle-item02-a">{{Remark}}</view>
+    <view class="middle-item03">{{office}}</view>
     <image src="{{image}}" class="img-item01"></image>
   </view>
   <!-- <view class='container'>金兰</view> -->

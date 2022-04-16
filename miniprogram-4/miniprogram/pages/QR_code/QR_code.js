@@ -7,6 +7,10 @@ Page({
    */
   data: {
     image:'',
+    name:'',//姓名
+    Remark:'',//备注
+    office:'',//办公室
+    job_title:'',//职务
     counselor:true
   },
 
@@ -27,7 +31,11 @@ Page({
       success(res){
         console.log(res)
         that.setData({
-          image:res.data.data
+          image:res.data.data,
+          name:res.data.info.姓名,
+          office:res.data.info.办公室,
+          Remark:res.data.info.备注,
+          job_title:res.data.info.职务,
         })
         
       }
