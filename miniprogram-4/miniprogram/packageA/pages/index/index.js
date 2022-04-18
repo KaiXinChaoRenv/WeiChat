@@ -80,7 +80,7 @@ Page({
       inputValue: '',
       imgSrc: '',
       lightArray: [],
-      bg:''
+      bg:'',
     }
   },
   onReady() {
@@ -341,7 +341,6 @@ Page({
           // Do something when catch error
         }
 
-
       })
 
   },
@@ -365,13 +364,12 @@ Page({
     this.ctx.putImageData(this.canvasImg, 0, 0)
     if(this.data.inputValue){
       wx.request({
-        url: `https://wx.request.chenxv.link:8002/学院信息查询/姓名查询/${this.data.inputValue}`, //仅为示例，并非真实的接口地址
+        url: `https://wx.request.huangjinyu.xyz:8100/学院信息查询/姓名查询/${this.data.inputValue}`, //仅为示例，并非真实的接口地址
 
         header: {
           'content-type': 'application/json' // 默认值
         },
         success (res) {
-          console.log(res.data)
           that.setData({
             lightArray: res.data
           })
@@ -379,6 +377,7 @@ Page({
         }
       })
     }
+
   },
   drawLight(){
     this.data.lightArray.forEach(it=>{

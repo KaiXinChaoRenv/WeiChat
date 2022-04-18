@@ -39,7 +39,7 @@ Page({
   },
   loadMore:function (){
     const that = this
-    wx.request({url: `https://wx.request.huangjinyu.xyz:8100/学院信息查询/问题查询?page=${that.data.currentPage}` ,   header: {
+    wx.request({url: `https://wx.request.huangjinyu.xyz:8100/学院信息查询/问题查询?page=${that.data.currentPage}&limit=10` ,   header: {
         'content-type': 'application/json' // 默认值
       },
       success (res) {
@@ -56,7 +56,11 @@ Page({
   onShow: function () {
 
   },
-
+  linkToComplaint(){
+    wx.navigateTo({
+      url: '../complaint/complaint'
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */

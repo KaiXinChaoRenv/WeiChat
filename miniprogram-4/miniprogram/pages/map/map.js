@@ -26,7 +26,7 @@ Page({
       ],
       controls: [{
         id: 1,
-        iconPath: 'http://www.chenxv.link/imgTemp/%E5%8A%A0.png',
+        iconPath: 'http://www.huangjinyu.xyz/imgTemp/%E5%8A%A0.png',
         position: {
           left: 320,
           top: 100 - 50,
@@ -37,7 +37,7 @@ Page({
       },
       {
         id: 2,
-        iconPath: 'http://www.chenxv.link/imgTemp/%E5%87%8F.png',
+        iconPath: 'http://www.huangjinyu.xyz/imgTemp/%E5%87%8F.png',
         position: {
           left: 340,
           top: 100 - 50,

@@ -80,22 +80,34 @@ Page({
 
         return
       }
-      console.log({
-        choose: this.data.result,
-        detail: this.data.detail,
-        connect: this.data.connect
+    try{
+        const data = {
+          choose: this.data.result,
+          detail: this.data.detail,
+          connect: this.data.connect
+        }
+      const openid = wx.getStorageSync('openid')
+      wx.request({
+        url:'https://wx.request.huangjinyu.xyz:8100/学院信息查询/提交反馈',
+        data: {
+          openid,
+          question: data.detail,
+          question_type: data.choose,
+          connect_info: data.connect
+        },
+        success: function (res) {
+          console.log(res)
+          wx.reLaunch({
+            url: "/pages/my/my"
+          })
+        }
       })
-    wx.showToast({
-      title: '成功',
-      icon: 'success',
-      duration: 1000,
-
-    })
-    setTimeout(()=>{
-        wx.reLaunch({
-          url: "/pages/my/my"
-        })
-    },1000)
+      wx.showToast({
+        title: '成功',
+        icon: 'success',
+        duration: 1000,
+      })
+    }catch (err){}
 
   },
     /**

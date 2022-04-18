@@ -64,7 +64,6 @@ Page({
       })
       const now = Date.now()
       const Hours = new Date().getHours(now)
-      console.log(typeof Hours,Hours)
       if( Hours >=18){
         this.setData({
           timer: '晚上好',
@@ -92,11 +91,10 @@ Page({
         })
       }
       const that = this
-      wx.request({url: `https://wx.request.huangjinyu.xyz:8100/学院信息查询/问题查询` ,   header: {
+      wx.request({url: `https://wx.request.huangjinyu.xyz:8100/学院信息查询/问题查询?page=${that.data.currentPage}&limit=10` ,   header: {
           'content-type': 'application/json' // 默认值
         },
         success (res) {
-          console.log(res.data)
           const total = res.question_sum
           const data  = res.data.data
           that.setData({
@@ -114,13 +112,12 @@ Page({
 
     },
   loadMore:function (){
-    console.log(this.data.currentPage)
     if(this.data.currentPage * this.data.limit >= this.data.dataSum){
       return
     }
 
     const that = this
-    wx.request({url: `https://wx.request.huangjinyu.xyz:8100/学院信息查询/问题查询?page=${that.data.currentPage}` ,   header: {
+    wx.request({url: `https://wx.request.huangjinyu.xyz:8100/学院信息查询/问题查询?page=${that.data.currentPage}&limit=10` ,   header: {
         'content-type': 'application/json' // 默认值
       },
       success (res) {
@@ -152,13 +149,12 @@ Page({
     console.log(e.detail)
     const that = this
     if(e.detail.length > 0){
-      wx.request({url: `https://wx.request.huangjinyu.xyz:8100/学院信息查询/问题查询?question=${e.detail}`,
+      wx.request({url: `https://wx.request.huangjinyu.xyz:8100/学院信息查询/问题查询?question=${e.detail}&limit=10`,
         header: {
           'content-type': 'application/json' // 默认值
         },
         success (res) {
           const data  = res.data
-          console.log()
           if(data.answer.length > 0 && Array.isArray(data.answer)){
             that.setData({
               showEmpty:  false,

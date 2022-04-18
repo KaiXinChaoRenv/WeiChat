@@ -7,6 +7,6 @@
     </van-collapse>
   </scroll-view>
     <view class="top-item02">
-    <view class="bottom-item-03"><button class="button01">我要反馈</button></view>
+    <view class="bottom-item-03"><button class="button01" bindtap="linkToComplaint">我要反馈</button></view>
     </view>
 </view>

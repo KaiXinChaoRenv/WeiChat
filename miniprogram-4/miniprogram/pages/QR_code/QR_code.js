@@ -26,20 +26,39 @@ Page({
    */
   onReady: function () {
     const that = this
-    wx.request({
-      url: 'https://wx.request.huangjinyu.xyz:8100//wx_login/%E6%95%99%E5%B8%88%E4%BA%8C%E7%BB%B4%E7%A0%81?openid=o1zkW5DTS4s68Bgt3f0t1Tlgchu4&name=%E9%87%91%E5%85%B0',
-      success(res){
-        console.log(res)
-        that.setData({
-          image:res.data.data,
-          name:res.data.info.姓名,
-          office:res.data.info.办公室,
-          Remark:res.data.info.备注,
-          job_title:res.data.info.职务,
-        })
-        
-      }
-    })
+    try{
+      const openid = wx.getStorageSync('openid')
+      const name = wx.getStorageSync('name')
+      console.log(openid)
+      wx.request({
+        url: `https://wx.request.huangjinyu.xyz:8100/wx_login/%E6%95%99%E5%B8%88%E4%BA%8C%E7%BB%B4%E7%A0%81?openid=${openid}&name=${name}`,
+        success(res){
+          console.log(res)
+          if(res.data.code === 0){
+            that.setData({
+              image:'https://img.yzcdn.cn/vant/empty-image-default.png',
+              name,
+              office:'x-xxx',
+              Remark:'xxxx-xxxx-xxxx',
+              job_title:'xxx',
+            })
+          }else {
+            that.setData({
+              image:res.data.data,
+              name:res.data.info.姓名,
+              office:res.data.info.办公室,
+              Remark:res.data.info.备注 || '',
+              job_title:res.data.info.职务,
+            })
+          }
+
+
+        }
+      })
+    }catch(err){
+
+    }
+
   },
 
   /**

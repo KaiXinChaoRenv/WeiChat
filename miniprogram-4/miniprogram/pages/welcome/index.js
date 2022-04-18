@@ -66,33 +66,75 @@ Page({
         wx.setStorageSync('themeIndex', this.data.theme)
         wx.setStorageSync('themeArray', [
           {
-            colors: ['#F0ECEB80', '#F5F2BD80', '#DBC65980', '#8FA05980', '#A6BA4B80', '#D5E39480'],
-            bg: 'http://www.chenxv.link/imgTemp/1_r.jpg'
+            colors: ['#F6F5CD80', '#FFD5C080', '#EE9BA680', '#6555A080', '#554D4B80', '#8F9E6680'],
+            bg: 'http://www.huangjinyu.xyz/imgTemp/1_r.png'
           },
             {
-              colors: ['#D0D9E880', '#E0D1D680', '#94B6C280', '#3A436280', '#92B1D080', '#25305E80'],
-              bg: 'http://www.chenxv.link/imgTemp/2_r.jpg'
+              colors: ['#EEF3F980', '#DFEAF580', '#C5D9EF80', '#A69B9580', '#CD73B080', '#F6D3E980'],
+              bg: 'http://www.huangjinyu.xyz/imgTemp/2_r.png'
             },
             {
-              colors: ['#D8D3D980', '#C0BBDB80', '#766BB080', '#4C417980', '#685C6080', '#C8A56380'],
-              bg: 'http://www.chenxv.link/imgTemp/3_r.jpg'
+              colors: ['#F7F6D380', '#ECE49F80', '#E0CE8680', '#C4B76880', '#635D5880', '#B1CAE680'],
+              bg: 'http://www.huangjinyu.xyz/imgTemp/3_r.png'
             },
             {
-              colors: ['#D1CDC480', '#987E6780', '#75533080', '#AF703B80', '#DCA82E80', '#E4CDA180'],
-              bg: 'http://www.chenxv.link/imgTemp/4_r.jpg'
+              colors: ['#C9D7B980', '#84759480', '#8192B180', '#A0B6CF80', '#B7CAD980', '#D7DCE180'],
+              bg: 'http://www.huangjinyu.xyz/imgTemp/4_r.png'
             },
             {
-              colors: ['#D5CCC580', '#D66B7580', '#EDBFB280', '#91875480', '#E2D69C80', '#E0959280'],
-              bg: 'http://www.chenxv.link/imgTemp/5_r.jpg'
+              colors: ['#E5E4DD80', '#CDD8D280', '#A7B18D80', '#79575980', '#F2949C80', '#F8E2DC80'],
+              bg: 'http://www.huangjinyu.xyz/imgTemp/5_r.png'
             },
+          {
+            colors: ['#F8F8E680', '#E0DAF080', '#C4BFE380', '#9985B280', '#6D5B7480', '#97709580'],
+            bg: 'http://www.huangjinyu.xyz/imgTemp/6_r.png'
+          },
+          {
+            colors: ['#DEB6E480', '#C986C480', '#A0569280', '#873A7280', '#3A363680', '#53694A80'],
+            bg: 'http://www.huangjinyu.xyz/imgTemp/7_r.png'
+          },
+          {
+            colors: ['#E8EDEC80', '#D7D4F480', '#C5B5E480', '#8E6CA880', '#758C7180', '#F2D5A480'],
+            bg: 'http://www.huangjinyu.xyz/imgTemp/8_r.png'
+          },
+          {
+            colors: ['#A97DC580', '#8C5AA680', '#4E496480', '#D995D380', '#EEC0EC80', '#E7DEEB80'],
+            bg: 'http://www.huangjinyu.xyz/imgTemp/9_r.png'
+          },
+          {
+            colors: ['#FBEBEA80', '#FAE4D980', '#FBD7AC80', '#F1AF7980', '#48565080', '#ADBF7380'],
+            bg: 'http://www.huangjinyu.xyz/imgTemp/10_r.png'
+          },
           ]
         )
-
-        wx.reLaunch({
-          url: '../front-page/front-page'
+        const that = this
+        wx.login({
+          success (res) {
+            console.log(res)
+            wx.showLoading({
+              title: '加载中',
+            })
+            if (res.code) {
+              wx.request({
+                url: `https://wx.request.huangjinyu.xyz:8100/wx_login/login?role=${that.data.radio}&name=${that.data.name}&themeIndex=${that.data.theme}&code=${res.code}`,
+                success(res) {
+                  try{
+                    console.log(res.data.openid)
+                    wx.setStorageSync('openid', res.data.openid)
+                  }catch (err){}
+                }
+              })
+              wx.reLaunch({
+                url: '../front-page/front-page'
+              })
+            } else {
+              console.log('登录失败！' + res.errMsg)
+            }
+          }
         })
-      } catch (e) {
-      }
+
+
+      } catch (e) {}
     }
     this.setData({
       active: this.data.active + 1

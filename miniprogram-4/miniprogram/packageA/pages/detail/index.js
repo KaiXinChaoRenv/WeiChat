@@ -29,7 +29,6 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success (res) {
-        console.log(res.data[0])
         const data  = res.data[0]
         that.setData({
           array: data.教师信息

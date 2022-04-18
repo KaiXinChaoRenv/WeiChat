@@ -1,6 +1,5 @@
 <!--index.wxml-->
 <view class="container-fluid pt-2">
-  <view class="bg" style="background-image: url('{{ bg }}')"></view>
   <view class="form-group row justify-content-center">
     <view class="col-10 positionRelay">
       <form>
@@ -18,7 +17,11 @@
     </view>
   </view>
 
-  <canvas type="2d" canvas-id="can1" id="can" style="width: 345px; height: 716px;" bindtouchstart="getDetail"></canvas>
+  <canvas type="2d" canvas-id="can1" id="can" style="width: 345px; height: 716px;" bindtouchstart="getDetail">
+
+  </canvas>
+  <view class="bg" style="background-image: url('{{ bg }}')"></view>
+
 </view>
 
 

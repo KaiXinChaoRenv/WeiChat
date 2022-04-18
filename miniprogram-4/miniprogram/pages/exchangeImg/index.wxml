@@ -1,0 +1,18 @@
+<!--pages/exchangeImg/index.wxml-->
+<view >
+  <van-grid column-num="3" border="{{ false }}" gutter="{{ 10 }}">
+    <van-grid-item use-slot wx:for="{{ 10 }}" wx:for-item="index" wx:key="index" >
+      <van-image
+          width="110"
+          height="100"
+          src="http://www.chenxv.link/imgTemp/{{ index + 1 }}_r.png"
+          class="{{ theme===index ? 'active': ''}}"
+          bindtap="chooseTheme"
+          data-id="{{ index }}"
+      />
+    </van-grid-item>
+  </van-grid>
+  <div class="btn-wrapper next">
+    <van-button  round   color="#38f" bind:click="nextStep" >确认修改</van-button>
+  </div>
+</view>
