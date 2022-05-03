@@ -5,7 +5,14 @@ Page({
    */
   data: {
     activeNames: [],
-    array: []
+    array: undefined,
+    show: false,
+    actions: [
+      {
+        name: '留言',
+      },
+    ],
+    currentTeacher: ''
   },
   onChange(event) {
     this.setData({
@@ -30,13 +37,33 @@ Page({
       },
       success (res) {
         const data  = res.data[0]
-        that.setData({
-          array: data.教师信息
-        })
+        if(data.教师信息){
+          that.setData({
+            array: data.教师信息
+          })
+        }else {
+          that.setData({
+            array: []
+          })
+        }
+
       }
     })
   }
   ,
+  showButton(e){
+    const dataset = e.currentTarget.dataset
+    this.setData({show: true,currentTeacher: dataset.id})
+  },
+  onClose() {
+    this.setData({ show: false });
+  },
+  selectRead(e) {
+    const name = this.data.currentTeacher
+    wx.navigateTo({
+      url:`../message/index?name=${name}`
+    })
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

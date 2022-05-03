@@ -72,7 +72,7 @@
     border-radius: 25rpx;
     text-align: center;
     color: white;
-    background-color: #4CAF50;
+    background-color: #38f;
 
 }
 .disabled {

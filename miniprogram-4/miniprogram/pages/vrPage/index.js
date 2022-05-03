@@ -18,7 +18,7 @@ Page({
         // 记录canvas的id，好在page销毁的时候释放canvas
         this.setData({ canvasId: canvas._canvasId })
 
-        const camera = new THREE.PerspectiveCamera(75, canvas.width / canvas.height, 1, 2000);
+        const camera = new THREE.PerspectiveCamera(75, canvas.width  / canvas.height , 1, 4000);
         camera.position.z = 500;
         const scene = new THREE.Scene();
         scene.background = new THREE.Color(0xAAAAAA);
@@ -30,18 +30,27 @@ Page({
 
         camera.position.set(-0.1, 2, -5);
         controls.update();
-
-        var sides = ['http://www.huangjinyu.xyz/imgTemp/%E5%8F%B3.jpg', 'http://www.huangjinyu.xyz/imgTemp/%E5%B7%A6.jpg','http://www.huangjinyu.xyz/imgTemp/%E4%B8%8A.jpg', 'http://www.huangjinyu.xyz/imgTemp/%E4%B8%8B.jpg','http://www.huangjinyu.xyz/imgTemp/%E5%89%8D.jpg', 'http://www.huangjinyu.xyz/imgTemp/%E5%90%8E.jpg']
+        wx.showLoading({
+          title: '加载中',
+        })
+        const baseUrl = 'https://cdn.chenxv.link/imgTemp'
+        var sides = [`${baseUrl}/%E5%8F%B3.jpg`, `${baseUrl}/%E5%B7%A6.jpg`,`${baseUrl}/%E4%B8%8A.jpg`, `${baseUrl}/%E4%B8%8B.jpg`,`${baseUrl}/%E5%89%8D.jpg`,`${baseUrl}/%E5%90%8E.jpg`]
         var materials = [];
+        let show = true
         for (var i = 0; i < sides.length; i++) {
           var side = sides[i];
           var texture = new THREE.TextureLoader().load(side,function (res){
             renderer.render(scene, camera)
+            if(show){
+              wx.hideLoading()
+              show = false
+            }
           });
           materials.push( new THREE.MeshBasicMaterial( { map: texture } ) );
         }
 
-        var mesh = new THREE.Mesh( new THREE.BoxBufferGeometry( canvas.height, canvas.height, canvas.height ), materials );
+        var mesh = new THREE.Mesh( new THREE.BoxBufferGeometry( canvas.height, canvas.height, 2 * canvas.height ), materials );
+        // mesh.geometry.scale( -1, 1, 1 );
         mesh.geometry.scale( -1, 1, 1 );
 
         texture.minFilter = THREE.LinearFilter;
@@ -54,7 +63,7 @@ Page({
         function onWindowResize() {
           camera.aspect = window.innerWidth / window.innerHeight;
           camera.updateProjectionMatrix();
-          renderer.setSize(canvas.width, canvas.height);
+          renderer.setSize(canvas.width * 2, canvas.height);
         }
         function render() {
           canvas.requestAnimationFrame(render);

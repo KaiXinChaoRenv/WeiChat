@@ -27,7 +27,7 @@
     <view class="message-board {{message1?'second':''}}" bindtap="Read" style="padding-left: 25rpx">问题查询<image src="../image/active.png" alt="" class="mini-img next" wx:if="{{message2}}"></image></view>
   </view>
   <scroll-view class="scroll-wrapper" scroll-y='true' bindscrolltolower="loadMore" wx:if="{{message1}}">
-    <view  class="item01-answer" wx:for="{{array}}" wx:key="{{item.question}}">
+    <view  class="item01-answer" wx:for="{{array}}" wx:key="question">
       <view class="item02-answer">
         <view class="item01-text">Q：{{item.question}}</view>
       </view>
@@ -35,8 +35,9 @@
         <view class="item02-text">A：{{item.answer}}</view>
       </view>
     </view>
-  </scroll-view>
+    <van-loading color="#1989fa" wx:if="{{array.length === 0}}" class="center">加载中...</van-loading>
 
+  </scroll-view>
 
 <view wx:if="{{message2}}" >
 <!--  <view style="margin-left: 25px; font-size: 23px">暂未上线!!</view>-->
@@ -54,7 +55,7 @@
           bind:search="onSearch"
       ></van-search>
     </van-sticky>
-    <van-cell-group  wx:for="{{searchResArr}}"  wx:key="{{item.id}}" inset>
+    <van-cell-group  wx:for="{{searchResArr}}"  wx:key="id" inset>
       <van-cell icon="question-o" title="{{item['问题']}}"  />
       <van-cell icon="comment-o" title="{{item['答案']}}" />
     </van-cell-group>

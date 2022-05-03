@@ -2,20 +2,35 @@
 <view >
   <van-steps steps="{{ steps }}" active="{{ active }}"  active-color="#38f" />
   <view class="chose-statue" wx:if="{{ active === 0 }}">
+    <view class="header">
+      <view class="statue-title">请选择您的身份</view>
+      <view  class="statue-text">让我们为你提供更好的服务</view>
+    </view>
+
     <van-radio-group value="{{ radio }}" bind:change="onChange" >
       <van-cell-group >
-        <van-cell title="学生" label="你可以使用所有基础功能" clickable data-name="1" bind:click="onClick">
-          <van-radio slot="right-icon" name="1" />
+        <van-cell   clickable data-name="1" bind:click="onClick" custom-class="cell-wrapper">
+          <view  slot="title" class="student">
+            我是学生
+          </view>
+          <van-radio slot="right-icon" custom-class="inner-radio" name="1"  icon-size="22px"/>
         </van-cell>
-        <van-cell title="老师" label="你将拥有一些额外的功能" clickable data-name="2" bind:click="onClick">
-          <van-radio slot="right-icon" name="2" />
+        <van-cell   clickable data-name="2" bind:click="onClick" custom-class="cell-wrapper-teacher">
+          <view  slot="title" class="student">
+            我是老师
+          </view>
+          <van-radio slot="right-icon" custom-class="inner-radio" name="2" icon-size="22px" />
         </van-cell>
 
       </van-cell-group>
     </van-radio-group>
   </view>
 
-  <view wx:if="{{ active === 1 }}">
+  <view wx:if="{{ active === 1 }}" class="chose-statue">
+    <view class="header">
+      <view class="statue-title">请您提供一些信息</view>
+      <view  class="statue-text">让我们为你提供更多的功能</view>
+    </view>
     <van-cell-group>
       <van-field
           model:value="{{ name }}"
@@ -24,10 +39,21 @@
           border="{{ false }}"
       />
       <van-cell title="用户头像和昵称"  label="用于基本的显示" border="{{ false }}" >
-        <button size="mini" bindtap="getUserIcon">点击获取</button>
+        <button size="mini" bindtap="getUserIcon" wx:if="{{!userInfo.avatarUrl}}">点击获取</button>
+        <view class="image-box" wx:else>
+          <van-image
+              custom-class="avatarUrl-image"
+              width="50"
+              height="50"
+              fit="contain"
+              src="{{ userInfo.avatarUrl }}"/>
+          <view>已授权 | {{ userInfo.nickName }}</view>
+        </view>
+
 
       </van-cell>
     </van-cell-group>
+
   </view>
 
   <view wx:if="{{ active === 2 }}">
@@ -36,7 +62,7 @@
         <van-image
             width="110"
             height="100"
-            src="http://www.chenxv.link/imgTemp/{{ index + 1 }}_r.png"
+            src="https://cdn.chenxv.link/imgTemp/{{ index + 1 }}_r.png"
             class="{{ theme===index ? 'active': ''}}"
             bindtap="chooseTheme"
             data-id="{{ index }}"

@@ -74,15 +74,25 @@ function fillText2(str, begX, begY, ctx) {
 
 
 Page({
-  data(){
-    return {
+  data: {
       resetShow: false,
       inputValue: '',
       imgSrc: '',
       lightArray: [],
       bg:'',
+      role: 0
+  },
+
+  onLoad(){
+    try{
+      this.setData({
+        role: wx.getStorageSync('role')
+      })
+    }catch (e) {
+
     }
   },
+
   onReady() {
     const query = wx.createSelectorQuery()
     query.select('#can')
@@ -116,11 +126,12 @@ Page({
         try {
           const arr  = wx.getStorageSync('themeArray')
           const index  = wx.getStorageSync('themeIndex')
-          const { colors,bg } = arr[index]
+          let { colors,bg } = arr[index]
           colors.push('transparent')
           this.setData({
             bg
           })
+
           if (colors) {
             ctx.strokeRectPro("3-211",0, 0, 65, 50,colors[0])
             fillText('3-211', 11, 32, ctx)
@@ -362,6 +373,9 @@ Page({
     // 获取按钮元素的坐标信息
     const that = this
     this.ctx.putImageData(this.canvasImg, 0, 0)
+    that.setData({
+      lightArray: [],
+    })
     if(this.data.inputValue){
       wx.request({
         url: `https://wx.request.huangjinyu.xyz:8100/学院信息查询/姓名查询/${this.data.inputValue}`, //仅为示例，并非真实的接口地址
@@ -370,9 +384,9 @@ Page({
           'content-type': 'application/json' // 默认值
         },
         success (res) {
-          that.setData({
-            lightArray: res.data
-          })
+            that.setData({
+              lightArray: res.data,
+            })
           that.drawLight()
         }
       })

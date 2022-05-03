@@ -133,3 +133,18 @@
     background-size: cover;
 }
 
+.position-center{
+    opacity: 0;
+    background-color: #F6F6F6;
+    position: absolute;
+    top: 165px;
+    left: 5px;
+    width: 245px;
+    height: 160px;
+    border-radius: 12px;
+    color: #000;
+    transition: all, 0.5s;
+}
+.position-center.active{
+    opacity: 1;
+}

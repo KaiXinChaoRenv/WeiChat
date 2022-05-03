@@ -146,7 +146,6 @@ Page({
 
     },
   onSearch(e){
-    console.log(e.detail)
     const that = this
     if(e.detail.length > 0){
       wx.request({url: `https://wx.request.huangjinyu.xyz:8100/学院信息查询/问题查询?question=${e.detail}&limit=10`,
@@ -155,17 +154,18 @@ Page({
         },
         success (res) {
           const data  = res.data
-          if(data.answer.length > 0 && Array.isArray(data.answer)){
-            that.setData({
-              showEmpty:  false,
-              searchResArr:  data.answer,
-            })
-          }else {
-            that.setData({
-              showEmpty:  true,
-              searchResArr:  [],
-            })
-          }
+          if(data.answer){
+              that.setData({
+                showEmpty:  false,
+                searchResArr:  data.answer,
+              })
+            }else {
+              that.setData({
+                showEmpty:  true,
+                searchResArr:  [],
+              })
+            }
+
 
         }})
      }

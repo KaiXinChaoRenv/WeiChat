@@ -150,6 +150,67 @@ Page({
             cylinder.rotation.x = Math.PI / 2
             group.add( cylinder );
           }
+          const loader = new THREE.FontLoader();
+          // promisify font loading
+          function loadFont(url) {
+            return new Promise((resolve, reject) => {
+              loader.load(url, resolve, undefined, reject);
+            });
+          }
+
+          async function doit(text,position,side, size=0.2) {
+            const font = await loadFont('https://wx.request.huangjinyu.xyz:8100/media/file/gentilis_regular.typeface.json');
+            const geometry = new THREE.TextBufferGeometry(text, {
+              font: font,
+              size,
+              height: 0.03,
+              curveSegments: 12,
+              bevelEnabled: false,
+              bevelThickness: 0.15,
+              bevelSize: .3,
+              bevelSegments: 5,
+            });
+            const material = new THREE.MeshToonMaterial( {color:'#fff'} );
+            const mesh = new THREE.Mesh(geometry, material);
+            geometry.computeBoundingBox();
+            geometry.boundingBox.getCenter(mesh.position).multiplyScalar(-1);
+            mesh.position.set(...position)
+            if(side === 'down'){
+              mesh.rotation.x = Math.PI /2
+            }else if(side === 'left'){
+              mesh.rotation.z = Math.PI /2
+              mesh.rotation.y = Math.PI /2
+            }else if(side === 'right'){
+              mesh.rotation.z = -Math.PI /2
+              mesh.rotation.y = -Math.PI/2
+            }
+            group.add(mesh);
+            // addObject(0, -3, parent);
+          }
+          doit('3-212',[-3.05,3.2,2.2], 'left');
+          doit('3-213',[-3.05,1.6,2.2], 'left');
+          doit('3-209',[-2.3,2.6,2.0], 'down');
+          doit('3-208',[-1.1,2.6,2.0], 'down',0.13);
+          doit('3-207',[-0.3,2.6,2.0], 'down',0.13);
+          doit('3-206',[0.5,2.6,2.0], 'down',0.13);
+          doit('3-205',[1.3,2.6,2.0], 'down',0.13);
+          doit('3-204',[2.2,3.6,2.0], 'down');
+          doit('3-202',[2.54,2.85,2.0], 'right');
+          doit('3-201',[2.54,1.65,2.0], 'right');
+          doit('4-201',[2.54,-1.15,2.0], 'right',0.18);
+          doit('4-202',[2.54,-2.2,2.0], 'right',0.18);
+          doit('wc',[2.54,-3.2,2.0], 'right',0.18);
+          doit('4-203',[2.54,-4.9,2.0], 'right',0.18);
+          doit('4-204',[2.54,-6.05,2.0], 'right',0.18);
+          doit('wc',[2.54,-7.2,2.0], 'right',0.18);
+          doit('4-205',[2.54,-7.9,2.0], 'right',0.15);
+          doit('4-206',[2.54,-8.7,2.0], 'right',0.15);
+          doit('4-210',[-0.60,-3.55,2.2], 'right');
+          doit('4-206',[-0.60,-6.1,2.2], 'right');
+          doit('4-207',[-1.75,-3.65,2.2], 'left');
+          doit('4-208',[-1.75,-5.45,2.2], 'left');
+          doit('4-209',[-1.75,-7.28,2.2], 'left');
+          // doit('3-213',[1.1,1.6,2.2], 'right');
           // level1
           createCubeLevel1([3.5, 5,heightLevel1],[-2.4, 3.25 , heightLevel1], myTexture.texture, 4)
           createCubeLevel1([3.5, 5,heightLevel1],[2.55, 3.25 , heightLevel1], myTexture.texture, 4)
@@ -174,6 +235,7 @@ Page({
           createCircle([0.1,0.1, 0.5,32],[-2.2,0.85,2.01],4)
           createCircle([0.1,0.1, 0.5,32],[-2.6,0.85,2.01],4)
           createCircle([0.1,0.1, 0.5,32],[-3,0.85,2.01],4)
+          createCircle([0.1,0.1, 0.5,32],[-4.0,0.85,2.01],4)
           //楼梯过道
           createCube([1.15, 2.5,0.1],[2.05, -0.5 , 0.85], myTexture.texture, 4)
           //围栏 楼梯间
@@ -182,9 +244,14 @@ Page({
           createCircle([0.1,0.1, 0.5,32],[1.6,-0.4,1.61],4)
           createCircle([0.1,0.1, 0.5,32],[1.6,-0.8,1.61],4)
           createCircle([0.1,0.1, 0.5,32],[1.6,-1.2,1.61],4)
+          createCircle([0.1,0.1, 0.5,32],[1.6,-1.6,1.61],4)
 
           createCube([5.75, 0.3,0.5],[-1.3, 0.85 , 1.0], myTexture.texture, 4)
+          createCube([5.75, 0.3,0.1],[-1.3, 0.85 , 1.5], myTexture.texture, 4)
+          createCube([0.2, 2.3,0.1],[1.55, -0.6 , 1.25], myTexture.texture, 4)
+
           createCube([5.75, 0.3,0.5],[-1.45, -1.70 , 1.0], myTexture.texture, 4)
+
 
           // level 下半部
           // level1
@@ -218,14 +285,15 @@ Page({
           createCubeLevel1([0.4, 0.8, 0.3],[2.8, 0.35 , 0.3], myTexture.textureBg, 4)
           createCubeLevel1([0.4, 0.8, 0.3],[3.2, 0.35 , 0.6], myTexture.textureBg, 4)
           createCubeLevel1([0.4, 0.8, 0.3],[3.6, 0.35 , 0.9], myTexture.textureBg, 4)
-          createCubeLevel1([0.5, 1.6, 0.3],[4, -0.05 , 1.2], myTexture.textureBg, 4)
+          createCubeLevel1([0.4, 1.6, 0.3],[4, -0.05 , 1.2], myTexture.textureBg, 4)
 
           createCubeLevel1([0.4, 0.8, 0.3],[3.6, -0.4 , 1.5], myTexture.textureBg, 4)
           createCubeLevel1([0.4, 0.8, 0.3],[3.2, -0.4 , 1.8], myTexture.textureBg, 4)
           createCubeLevel1([0.4, 0.8, 0.3],[2.8, -0.4 , 2.1], myTexture.textureBg, 4)
           createCubeLevel1([0.4, 0.8, 0.3],[2.8, -0.4 , 2.4], myTexture.textureBg, 4)
 
-
+          createCubeOutLine([0.1, 1.8, height],[4.25, 0 , height], null,3)
+          createCube([0.1, 2.4,1.3],[4.25, -0.425 , 0.45], myTexture.texture, 4)
 
 
           createCubeOutLine([1.8, 1.1, height],[3.4, -1.4 , height], null, 2,'left','up')
@@ -456,22 +524,54 @@ Page({
           }
           // 以下都是装饰
           // 椅子
-          createChartPlus([1,-4.2,0])
-          createChartPlus([1,-6.8,0])
-          createChartPlus([-3,-4.9,0],'right')
+          createChartPlus([1,-3.8,0])
+          createChartPlus([1,-4.8,0])
+
+          createChartPlus([1,-6.3,0])
+          createChartPlus([1,-7.3,0])
+
+          createChartPlus([-3.2,-3.4,0],'right')
+          createChartPlus([-3.2,-5.1,0],'right')
+          createChartPlus([-3.2,-6.8,0],'right')
+
           createChartPlus([3.9,5.1,0],'down')
+          createChartPlus([2.65,5.1,0],'down')
+          createChartPlus([-1.85,5.1,0],'down')
           createChartPlus([3.6,2.5,0])
+          createChartPlus([3.6,1.1,0])
+
+          createChartPlus([3.6,-1.6,0])
+          createChartPlus([3.6,-2.6,0])
+          createChartPlus([3.6,-5.4,0])
+          createChartPlus([3.6,-6.6,0])
 
           createCupboard([0.5,0.5,1], [-0.1,-3, 2.0])
           createCupboard([0.5,0.5,1], [-3.8,-6.5, 2.0])
-          createCupboard([0.5,0.5,1], [-2.20,5.2, 2.0])
-          createCupboard([0.5,0.5,1], [3.6,-6.5,2.0])
+          createCupboard([0.5,0.5,1], [-2.20,3.3, 2.0])
           // 桌子
-          createCube([0.6,1.2,height*0.4],[0.5,-4,height],null,10)
-          createCube([0.6,1.2,height*0.4],[0.5,-6.6,height],null,10)
-          createCube([0.5,0.9,height*0.4],[-2.5,-5.1,height],null,10)
+          // 4-210
+          createCube([0.6,0.8,height*0.4],[0.5,-3.45,height],null,10)
+          createCube([0.6,0.8,height*0.4],[0.5,-4.5,height],null,10)
+          // 4-211
+          createCube([0.6,0.8,height*0.4],[0.5,-6.1,height],null,10)
+          createCube([0.6,0.8,height*0.4],[0.5,-7.1,height],null,10)
+          // 4-207
+          createCube([0.5,0.9,height*0.4],[-2.7,-3.6,height],null,10)
+          //4-208
+          createCube([0.5,0.9,height*0.4],[-2.7,-5.3,height],null,10)
+          //4-209
+          createCube([0.5,0.9,height*0.4],[-2.7,-7,height],null,10)
+
+          createCube([0.8,0.5,height*0.4],[-2.0,4.6,height],null,10)
+          createCube([0.8,0.5,height*0.4],[2.5,4.6,height],null,10)
           createCube([0.8,0.5,height*0.4],[3.7,4.6,height],null,10)
+          // 右侧办公室
           createCube([0.5,0.8,height*0.4],[3.1,2.6,height],null,10)
+          createCube([0.5,0.8,height*0.4],[3.1,1.3,height],null,10)
+          createCube([0.5,0.75,height*0.4],[3.1,-1.4,height],null,10)
+          createCube([0.5,0.75,height*0.4],[3.1,-2.4,height],null,10)
+          createCube([0.5,0.8,height*0.4],[3.1,-5.15,height],null,10)
+          createCube([0.5,0.8,height*0.4],[3.1,-6.35,height],null,10)
           // 电脑屏
           createCubeLevel1([1,0.1,1],[-3.35,-4.4,4.1],myTexture.textureComputer,8)
           createCubeLevel1([1,0.1,1],[-2.35,-4.4,4.1],myTexture.textureComputerRight,8)
@@ -481,14 +581,14 @@ Page({
           // 花盆
 
           createPlant([1.55,-3.0,4.1])
-          createPlant([1.55,-5.8,4.1])
+          // createPlant([1.55,-5.8,4.1])
           createPlant([-2.30,-3.0,4.1])
           createPlant([-3.75,-4.65,4.1])
           createPlant([-2.30,-6.5,4.1])
           createPlant([-3.30,5.1,4.1])
           createPlant([-0.1,5.1,4.1])
           createPlant([1.5,5.1,4.1])
-          createPlant([3.7,-5.2,4.1])
+          createPlant([3.7,-4.2,4.1])
 
 
           // 老师办公室 右
@@ -524,7 +624,6 @@ Page({
 
           const plane = new THREE.Mesh( planeGeometry, planeMaterial );
           plane.receiveShadow = true;
-          console.log(group)
           plane.position.set(0,-2,0)
           group.position.set(0,1.5,0)
           group.add( plane )

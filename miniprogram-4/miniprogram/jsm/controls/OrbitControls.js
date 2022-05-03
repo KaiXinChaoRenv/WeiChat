@@ -667,8 +667,7 @@ var OrbitControls = function (object, domElement) {
 	function handleTouchMoveRotate(event) {
 
 		if (event.touches.length == 1) {
-
-			rotateEnd.set(event.touches[0].pageX, event.touches[0].pageY);
+      rotateEnd.set(event.touches[0].pageX, event.touches[0].pageY);
 
 		} else {
 
@@ -715,8 +714,7 @@ var OrbitControls = function (object, domElement) {
 	}
 
 	function handleTouchMoveDolly(event) {
-
-		var dx = event.touches[0].pageX - event.touches[1].pageX;
+    var dx = event.touches[0].pageX - event.touches[1].pageX;
 		var dy = event.touches[0].pageY - event.touches[1].pageY;
 
 		var distance = Math.sqrt(dx * dx + dy * dy);

@@ -11,7 +11,7 @@ Page({
     Remark:'',//备注
     office:'',//办公室
     job_title:'',//职务
-    counselor:true
+    counselor:true,
   },
 
   /**
@@ -29,11 +29,10 @@ Page({
     try{
       const openid = wx.getStorageSync('openid')
       const name = wx.getStorageSync('name')
-      console.log(openid)
+
       wx.request({
         url: `https://wx.request.huangjinyu.xyz:8100/wx_login/%E6%95%99%E5%B8%88%E4%BA%8C%E7%BB%B4%E7%A0%81?openid=${openid}&name=${name}`,
         success(res){
-          console.log(res)
           if(res.data.code === 0){
             that.setData({
               image:'https://img.yzcdn.cn/vant/empty-image-default.png',

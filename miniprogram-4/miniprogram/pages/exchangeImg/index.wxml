@@ -5,10 +5,24 @@
       <van-image
           width="110"
           height="100"
-          src="http://www.chenxv.link/imgTemp/{{ index + 1 }}_r.png"
+          src="https://cdn.chenxv.link/imgTemp/{{ index + 1 }}_r.png"
           class="{{ theme===index ? 'active': ''}}"
           bindtap="chooseTheme"
           data-id="{{ index }}"
+      />
+    </van-grid-item>
+    <van-grid-item use-slot >
+      <van-uploader
+          preview-size="100"
+          class="{{theme===10 ? 'active': ''}}"
+          file-list="{{ fileList }}"
+          max-count="1"
+          deletable="{{ true }}"
+          preview-full-image="{{ false }}"
+          bind:delete="deleteImg"
+          bind:after-read="afterRead"
+          bind:click-preview="preview"
+          max-size="5242880"
       />
     </van-grid-item>
   </van-grid>

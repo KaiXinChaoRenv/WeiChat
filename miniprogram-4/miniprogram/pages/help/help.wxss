@@ -15,8 +15,8 @@
 }
 .button01{
     border-radius: 25rpx;
-    border: 1px solid tomato;
-    color: tomato;
+    border: 1px solid #38f;
+    color: #38f;
 }
 .scroll-wrapper{
     height: calc(100vh - 83px);
